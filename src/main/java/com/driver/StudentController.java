@@ -85,7 +85,7 @@ public class StudentController {
         List<String> students = null; // Assign list of student by calling service layer method
 
         try {
-            students = studentService.getStudentByteachername(teacher);
+            students = studentService.getStudentByTeachername(teacher);
             return new ResponseEntity<>(students, HttpStatus.OK);
         } catch(TeacherNotFoundException ex) {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -103,7 +103,7 @@ public class StudentController {
     @DeleteMapping("/delete-teacher-by-name")
     public ResponseEntity<String> deleteTeacherByName(@RequestParam String teacher){
 
-        studentService.deleteTeacheByName(teacher);
+        studentService.deleteTeacherByName(teacher);
         return new ResponseEntity<>(teacher + " removed successfully", HttpStatus.CREATED);
     }
     @DeleteMapping("/delete-all-teachers")

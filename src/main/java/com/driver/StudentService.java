@@ -56,7 +56,7 @@ public class StudentService {
         throw new TeacherNotFoundException("Teacher Not Found with name: "+name);
     }
 
-    public List<String> getStudentByteachername(String teacher) throws TeacherNotFoundException{
+    public List<String> getStudentByTeachername(String teacher) throws TeacherNotFoundException{
 //        List<String> studentList = null;
 //        if(getTeacherByName(teacher)!=null)
 //        {
@@ -79,9 +79,9 @@ public class StudentService {
         throw new StudentNotFoundException("There is no student available");
     }
 
-    public void deleteTeacheByName(String teacher) {
-        List<String> student = getStudentByteachername(teacher);
-        studentRepository.deleteTeacheByName(teacher);
+    public void deleteTeacherByName(String teacher) {
+        List<String> student = getStudentByTeachername(teacher);
+        studentRepository.deleteTeacherByName(teacher);
         for(String stud : student)
         {
             studentRepository.deletStudentByName(stud);
@@ -89,6 +89,11 @@ public class StudentService {
     }
 
     public void deleteAllTeachers() {
-        studentRepository.deleteAllTeacher();
+        //studentRepository.deleteAllTeacher();
+        List<String> tech = studentRepository.getAllTeacher();
+        for(String teach : tech)
+        {
+            deleteTeacherByName(teach);
+        }
     }
 }

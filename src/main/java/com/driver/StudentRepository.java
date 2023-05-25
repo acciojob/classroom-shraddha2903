@@ -43,7 +43,10 @@ public class StudentRepository {
 //                teacher=hm.getValue();
 //            }
 //        }
-        return teachers.get(name);
+        if(teachers.containsKey(name)) {
+            return teachers.get(name);
+        }
+        return null;
     }
 
     public List<String> getStudentByTeachername(String teacher) {
@@ -60,23 +63,18 @@ public class StudentRepository {
     }
 
     public List<String> getAllStudent() {
-        List<String> studentList=new ArrayList<>();
-        for(Map.Entry<String,Student> hm : students.entrySet())
-        {
-            studentList.add(hm.getValue().getName());
-        }
-        return  studentList;
+        return new ArrayList<>(students.keySet());
     }
 
-    public void deleteTeacheByName(String teacher) {
+    public void deleteTeacherByName(String teacher) {
         teachers.remove(teacher);
         studentTeacherPair.remove(teacher);
     }
 
-    public void deleteAllTeacher() {
-        teachers.clear();
-        studentTeacherPair.clear();
-    }
+//    public void deleteAllTeacher() {
+//        teachers.clear();
+//        studentTeacherPair.clear();
+//    }
 
     public Optional<Student> getStudent(String student) {
         if(students.containsKey(student))
@@ -96,5 +94,9 @@ public class StudentRepository {
 
     public void deletStudentByName(String stud) {
         students.remove(stud);
+    }
+
+    public List<String> getAllTeacher() {
+        return new ArrayList<>(teachers.keySet());
     }
 }
